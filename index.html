@@ -1,0 +1,123 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="theme-color" content="#120d0a">
+  <title>مزاج كافيه | المنيو</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <div class="ambient ambient-a"></div><div class="ambient ambient-b"></div>
+
+  <header class="hero">
+    <nav class="nav glass">
+      <div class="brand"><span class="brand-icon">☕</span><span id="brandName">مزاج كافيه</span></div>
+      <button class="secret-btn" id="ownerOpen" aria-label="لوحة المالك">◈</button>
+    </nav>
+    <div class="hero-content">
+      <div class="hero-copy">
+        <span class="eyebrow">SPECIALTY COFFEE • DAILY</span>
+        <h1 id="heroTitle">مزاجك يبدأ من هنا</h1>
+        <p id="heroDesc">قهوة مختارة، حلويات طازجة، وتفاصيل تخلي كل زيارة تجربة.</p>
+        <a href="#menu" class="hero-cta">استكشف المنيو <span>↓</span></a>
+      </div>
+      <div class="hero-orb">
+        <div class="orb-ring ring1"></div><div class="orb-ring ring2"></div>
+        <div class="cup-3d">☕</div>
+        <div class="orb-shadow"></div>
+      </div>
+    </div>
+  </header>
+
+  <main id="menu">
+    <section class="toolbar glass">
+      <div class="search-wrap"><span>⌕</span><input id="search" placeholder="ابحث عن قهوة، حلو، مشروب..."></div>
+      <div id="categories" class="categories"></div>
+    </section>
+
+    <section class="menu-section">
+      <div class="section-head">
+        <div><span class="eyebrow">OUR MENU</span><h2>اختار مزاجك</h2></div>
+        <span id="count" class="count"></span>
+      </div>
+      <div id="products" class="product-grid"></div>
+      <div id="empty" class="empty glass hidden">ماكو منتجات مطابقة للبحث.</div>
+    </section>
+  </main>
+
+  <aside id="cart" class="cart glass">
+    <div class="cart-head"><div><span class="eyebrow">YOUR ORDER</span><h3>طلبك</h3></div><button id="cartClose">×</button></div>
+    <div id="cartItems"></div>
+    <div class="cart-total"><span>المجموع</span><strong id="cartTotal">0 د.ع</strong></div>
+    <button id="checkout" class="primary wide">تأكيد الطلب</button>
+  </aside>
+  <button id="cartFab" class="cart-fab">🛒 <b id="cartBadge">0</b></button>
+
+  <div id="toast" class="toast"></div>
+
+  <!-- Owner modal -->
+  <div id="ownerModal" class="modal-backdrop hidden">
+    <div class="owner-panel glass">
+      <button class="modal-close" id="ownerClose">×</button>
+      <div id="loginView">
+        <span class="eyebrow">PRIVATE AREA</span><h2>دخول المالك</h2>
+        <p>هذه المنطقة لإدارة المنيو والموقع.</p>
+        <input id="loginCode" type="password" placeholder="الرمز السري">
+        <button id="loginBtn" class="primary wide">دخول آمن</button>
+        <small class="security-note">ملاحظة: هذه نسخة HTML/CSS/JS فقط، لذلك الرمز ليس حماية خادمية حقيقية.</small>
+      </div>
+
+      <div id="adminView" class="hidden">
+        <div class="admin-title"><div><span class="eyebrow">OWNER CONTROL</span><h2>لوحة التحكم</h2></div><button id="logoutBtn" class="ghost">تسجيل خروج</button></div>
+        <div class="admin-tabs">
+          <button class="tab active" data-tab="productsTab">المنتجات</button>
+          <button class="tab" data-tab="siteTab">الموقع</button>
+          <button class="tab" data-tab="securityTab">الأمان</button>
+        </div>
+
+        <section id="productsTab" class="tab-content">
+          <form id="productForm" class="admin-form">
+            <input type="hidden" id="editId">
+            <input id="pName" required placeholder="اسم المنتج">
+            <select id="pCategory"></select>
+            <input id="pPrice" required type="number" min="0" placeholder="السعر بالدينار">
+            <input id="pEmoji" placeholder="رمز/إيموجي المنتج، مثال ☕">
+            <input id="pImage" placeholder="رابط صورة (اختياري)">
+            <textarea id="pDesc" placeholder="وصف المنتج"></textarea>
+            <div class="form-actions"><button class="primary" type="submit" id="saveProduct">إضافة المنتج</button><button type="button" id="cancelEdit" class="ghost hidden">إلغاء التعديل</button></div>
+          </form>
+          <div class="admin-row"><h3>قائمة المنتجات</h3><button id="newProduct" class="ghost">+ منتج جديد</button></div>
+          <div id="adminProducts" class="admin-list"></div>
+          <div class="admin-row"><h3>التصنيفات</h3></div>
+          <div class="category-manager"><input id="newCategory" placeholder="تصنيف جديد"><button id="addCategory" class="primary">إضافة</button></div>
+          <div id="adminCategories" class="admin-categories"></div>
+        </section>
+
+        <section id="siteTab" class="tab-content hidden">
+          <form id="siteForm" class="admin-form">
+            <label>اسم الكافيه<input id="siteName"></label>
+            <label>العنوان الرئيسي<input id="siteTitle"></label>
+            <label>الوصف<textarea id="siteDesc"></textarea></label>
+            <label>عملة العرض<input id="siteCurrency"></label>
+            <button class="primary" type="submit">حفظ إعدادات الموقع</button>
+          </form>
+        </section>
+
+        <section id="securityTab" class="tab-content hidden">
+          <h3>تغيير الرمز السري</h3>
+          <p class="muted">اختر رمزاً جديداً. في هذه النسخة يتم حفظه محلياً على الجهاز.</p>
+          <form id="securityForm" class="admin-form">
+            <input id="oldCode" type="password" required placeholder="الرمز الحالي">
+            <input id="newCode" type="password" required minlength="4" placeholder="الرمز الجديد (4 أحرف على الأقل)">
+            <input id="confirmCode" type="password" required placeholder="تأكيد الرمز الجديد">
+            <button class="primary" type="submit">تغيير الرمز</button>
+          </form>
+        </section>
+      </div>
+    </div>
+  </div>
+
+  <script src="script.js"></script>
+</body>
+</html>
